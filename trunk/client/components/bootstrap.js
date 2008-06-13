@@ -34,7 +34,13 @@ var G_GDEBUG = true;
     "arc4.js",
     "cbc.js",
     "hmac.js",
-    "sha1.js"
+    "sha1.js",
+
+    // firefox basics
+    "preferences.js",
+    "debug.js",
+    "filesystem.js",
+    "objectsafemap.js"
     ];
 
   // Load js files
@@ -49,7 +55,7 @@ var G_GDEBUG = true;
       throw e;
     }
   }
-  CLB_dump("Done: " + SHA1);
+  CLB_dump("Done: " + G_Preferences);
 
   /**
    * Gets a nsIFile for the given physical path relative to the libs/ folder
