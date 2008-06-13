@@ -1,0 +1,3 @@
+content    browserstate    chrome/chromeFiles/content/
+overlay	   chrome://browser/content/browser.xul    chrome://browserstate/content/browser-overlay.xul
+locale     browserstate    en-US    chrome/chromeFiles/locale/en-US/

@@ -1,0 +1,34 @@
+#clb-ignition {
+  font-size:13px;
+  font-family:arial, sans-serif;
+}
+
+#clb-ignition-account {
+  font-size:16px;
+  font-weight:bold;
+}
+
+.clb-outer-box {
+  border:1px solid #C3D9FF; 
+  padding:3px; 
+  background:white;
+}
+
+.clb-inner-box {
+  background:#E8EEFA;
+  padding:0.5em 2em;
+}
+
+.clb-anc {
+  color:blue;
+  text-decoration:underline;
+}
+
+.wizard-header-label { 
+  margin-top:0.5em;
+  margin-bottom:0.5em;
+}
+
+.wizard-header-description { 
+  display:none;
+}

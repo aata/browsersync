@@ -1,0 +1,28 @@
+<?xml version="1.0"?>
+
+<RDF xmlns="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+   xmlns:em="http://www.mozilla.org/2004/em-rdf#">
+
+  <Description about="urn:mozilla:install-manifest">
+
+    <em:name>Google Browser Sync</em:name>
+    <em:id>browserstate@google.com</em:id>
+    <em:version>1.3.20070523.0</em:version>
+    <em:description>Synchronize settings between browsers</em:description>
+    <em:creator>Google</em:creator>
+    <em:iconURL>chrome://browserstate/content/icon-medium.png</em:iconURL>
+    <em:homepageURL>http://www.google.com/tools/firefox/browsersync/</em:homepageURL>
+    <em:updateURL><![CDATA[https://tools.google.com/firefox/update?guid=%ITEM_ID%&version=%ITEM_VERSION%&application=%APP_ID%&appversion=%APP_VERSION%&dist=google]]></em:updateURL>
+    <em:optionsURL>chrome://browserstate/content/settings.xul</em:optionsURL>
+
+    <em:targetApplication>
+      <Description>
+        <em:id>{ec8030f7-c20a-464f-9b0e-13a3a9e97384}</em:id>
+        <em:minVersion>1.5</em:minVersion>
+        <em:maxVersion>2.0.*</em:maxVersion>
+      </Description>
+    </em:targetApplication> 
+
+  </Description>
+
+</RDF>

@@ -1,0 +1,20 @@
+<?xml version="1.0"?>
+<?xml-stylesheet href="chrome://global/skin/" type="text/css"?>
+
+<dialog
+  xmlns="http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul"
+  id="clb-syncing" title="Please Wait" orient="vertical" buttons="cancel"
+  onload="setTimeout('load()',1);"
+  ondialogcancel="window.arguments[1]()" >
+
+  <label id="clb-title" style="font-weight:bold; margin-bottom:0.5em" 
+    value="Google Browser Sync is resynchronizing your browser"/>
+  <progressmeter id="clb-progress" mode="undetermined" />
+  <label id="clb-status" value="" />
+  
+  <script type="application/x-javascript">
+    function load() {
+      window.arguments[0](window);
+    }
+  </script>
+</dialog>

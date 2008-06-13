@@ -1,0 +1,84 @@
+<?xml version="1.0"?>
+<?xml-stylesheet href="chrome://global/skin/" type="text/css"?>
+<?xul-overlay href="chrome://browserstate/content/component-selector.xul"?>
+
+<dialog
+  xmlns="http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul"
+  xmlns:html="http://www.w3.org/1999/xhtml"
+  id="clb-login" title="Google Browser Sync Settings" orient="vertical" 
+  buttons="accept,cancel" 
+  ondialogaccept="return CLB_form.handleOKButtonClicked(event)"
+  ondialogcancel="">
+  
+  <tabbox>
+    <tabs>
+      <tab label="Account Information" />
+      <tab label="Sync Settings" />
+    </tabs>
+    <tabpanels>
+      <tabpanel orient="vertical" flex="1">
+        <groupbox flex="1">
+          <caption label="Google Account" style="font-weight:bold;" />
+          <vbox>
+            <hbox align="middle">
+              <description id="clb-user-desc" hidden="false" flex="1">
+                Currently associated with <html:b id="clb-username"/>.
+              </description>
+
+              <description id="clb-nouser-desc" hidden="true" flex="1">
+                No Google account is associated with this browser yet.
+              </description>
+
+              <button id="clb-change-login" label="Stop syncing"
+                oncommand="CLB_form.handleChangeLoginClicked(event)"/>
+            </hbox>
+            <description>Visit your <html:a onclick="CLB_form.handleAccountSettingsClicked(); return false;" href="#" style="color:blue; text-decoration:underline;">Google Account settings</html:a> to reset your password, change your security question, or learn about access to other Google services</description>
+          </vbox>
+        </groupbox>
+
+        <groupbox flex="1">
+          <caption label="Security PIN" style="font-weight:bold;" />
+          <description>
+            Your sensitive data is protected with this PIN. You will need it the 
+            first time you access your data on any other machines.
+          </description>
+          <hbox align="center">
+            <textbox id="clb-restart-text" readonly="true" type="password"
+              flex="1"/>
+            <button id="clb-show-button" label="Show" 
+              oncommand="CLB_form.handleShowButtonClicked(event)"/>
+          </hbox>
+        </groupbox>
+
+        <groupbox flex="1">
+          <caption label="Full Refresh" style="font-weight:bold;" />
+          <hbox align="middle">
+            <description flex="1">
+              Completely refresh and resave your browser settings (this 
+              may take up to five minutes, depending on how much stuff
+              you have).
+            </description>
+            <button id="clb-resync-button" label="Full Refresh"
+              disabled="false"
+              oncommand="CLB_form.handleResyncClicked(event)"/>
+          </hbox>
+        </groupbox>
+      </tabpanel>
+      
+      <tabpanel flex="1">
+        <groupbox flex="1">
+          <caption label="Synchronization Settings" style="font-weight:bold;" />
+          <vbox id="clb-component-selector" flex="1"/>
+        </groupbox>
+      </tabpanel>
+    </tabpanels>
+  </tabbox>
+  
+  <script type="application/x-javascript">
+    var CLB_form = 
+      new (Components.classes["@google.com/browserstate/app-context;1"]
+                     .getService()
+                     .wrappedJSObject
+                     .CLB_SettingsForm)(window);
+  </script>
+</dialog>
