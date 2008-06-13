@@ -28,10 +28,6 @@ var global = this;
  * @deprecated Calling f(undefinedvar) throws warnings in spidermonkey
  * (firefox) if javascript is running in strict mode. We should not write code
  * which throws warnings.
- *
- * Instead, you just have to do the typeof manually, or else use "foo" in obj,
- * if you have the property name as a string and know that the JSCompiler will
- * not rename it. Blech.
  */
 function isDef(val) {
   return typeof val != "undefined";
