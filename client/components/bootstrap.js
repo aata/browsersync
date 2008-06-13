@@ -20,9 +20,13 @@ var G_GDEBUG = true;
 (function() {
   // The list of script files to load
   var libs = [
+    // basics
     "lang.js",
+    "doubledictionary.js",
+    "set.js",
+    "workqueue.js",
 
-    // crypto basics
+    // crypto
     "aes.js",
     "arc4.js",
     "cbc.js",
