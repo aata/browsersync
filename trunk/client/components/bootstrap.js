@@ -26,6 +26,9 @@ var G_GDEBUG = true;
     "set.js",
     "workqueue.js",
 
+    // third-party
+    "iso8601.js",
+
     // crypto
     "aes.js",
     "arc4.js",
