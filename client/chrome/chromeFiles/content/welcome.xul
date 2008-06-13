@@ -1,0 +1,286 @@
+<?xml version="1.0"?>
+
+<?xml-stylesheet type="text/css" href="chrome://global/skin/"?>
+<?xml-stylesheet type="text/css" 
+  href="chrome://browserstate/content/welcome.css"?>
+<?xul-overlay href="chrome://browserstate/content/component-selector.xul"?>
+
+<wizard xmlns="http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul" 
+  xmlns:html="http://www.w3.org/1999/xhtml"
+  id="clb-signup" 
+  title="Google Browser Sync Signup Wizard"
+  width="560"
+  height="485"
+  onwizardfinish="CLB_form.handleWizardFinish()">
+
+  <wizardpage pageid="clb-warning" next="clb-welcome" 
+    onpageshow="CLB_form.handleWarningPageShow()"
+    onpageadvanced="return CLB_form.handleWarningPageAdvanced()"
+    label="Welcome to Google Browser Sync">
+    <description>
+      Google Browser Sync backs up your browser settings and synchronizes 
+      them between multiple computers. 
+    </description>
+
+    <description>
+      <html:b><html:span style="color:red;">WARNING:</html:span> Read this, 
+      especially if you're using a shared computer.</html:b>
+    </description>
+
+    <description>
+      When you synchronize more than one computer using Google Browser Sync, 
+      anyone who uses one of the computers will be able to see the settings 
+      from the other computers. You will be able to choose which settings to 
+      synchronize as part of this setup process. If anyone can use this 
+      computer who you don't want to access the selected browser settings, 
+      then don't install Google Browser Sync on this computer.
+    </description>
+
+    <description>
+      Once installed, Google Browser Sync will automatically <html:b>copy 
+      your browser settings</html:b> from other computers on which you install 
+      Google Browser Sync <html:b>to this computer</html:b>. These settings 
+      may include <html:b>passwords</html:b> and other sensitive information.
+    </description>
+  </wizardpage>
+
+  <wizardpage pageid="clb-welcome" next="clb-progress"
+    onpageshow="CLB_form.handleWelcomePageShow()"
+    onpageadvanced="return CLB_form.handleWelcomePageAdvanced()"
+    label="Step 1: Setting up your account">
+
+    <spacer style="height:1em;"/>
+
+    <hbox id="clb-ignition">
+      <spacer flex="1"/>
+      <vbox>
+        <vbox class="clb-outer-box" flex="2.5">
+          <vbox class="clb-inner-box">
+            <hbox pack="center">
+              <label>You can register this computer for</label>
+            </hbox>
+            <hbox pack="center">
+              <label>Google Browser Sync by entering your</label>
+            </hbox>
+            <hbox pack="center" align="center" 
+              style="margin:0.25em 0;">
+              <image src="chrome://browserstate/content/google.gif"/>
+              <label id="clb-ignition-account">Account</label>
+            </hbox>
+            <hbox pack="center" style="margin-bottom:1em;">
+              <label>username and password below.</label>
+            </hbox>
+            <grid>
+              <columns>
+                <column />
+                <column flex="1"/>
+              </columns>
+              <rows>
+                <row>
+                  <hbox align="center" pack="end">
+                    <label value="Email:"/>
+                  </hbox>
+                  <textbox id="clb-username" style="width:250px;"
+                    oninput="CLB_form.handleWelcomePageInput()" flex="1"/>
+                </row>
+                <row>
+                  <hbox align="center" pack="end">
+                    <label value="Password:"/>
+                  </hbox>
+                  <textbox id="clb-password" type="password"
+                    oninput="CLB_form.handleWelcomePageInput()" flex="1"/>
+                </row>
+                <spacer style="height:0.5em;"/>
+              </rows>
+            </grid>
+            <description style="text-align:center;">
+              <html:a href="#" class="clb-anc" 
+                onclick="CLB_form.handleForgotPassword()"
+                >Forgot your password?</html:a>
+            </description>
+          </vbox>
+        </vbox>
+        <spacer style="height:1em;"/>
+        <vbox class="clb-outer-box">
+          <vbox class="clb-inner-box" style="font-weight:bold;">
+            <description style="text-align:center; margin:0;">
+              Don't have a Google Account?<html:br/>
+              <html:a href="#" class="clb-anc" 
+                onclick="CLB_form.handleCreateGAIAAcct()"
+                >Create an account now</html:a>
+            </description>
+          </vbox>
+        </vbox>
+      </vbox>
+      <spacer flex="1"/>
+    </hbox>
+  </wizardpage>
+
+  <wizardpage pageid="clb-installtype"
+    onpageshow="return CLB_form.showInstallTypePage()"
+    onpageadvanced="return CLB_form.handleInstallTypePageAdvanced()"
+    label="Setup Type"
+    description="Step 2: Choosing setup options"
+    next="clb-settings">
+    <description>
+      Choose the type of setup you prefer, then click <html:b>Next</html:b>.
+    </description>
+    <spacer style="height:1em;"/>
+    <radiogroup orient="vertical">
+      <radio 
+        id="clb-installtype-default" 
+        selected="true" 
+        style="font-weight:bold;"
+        label="Standard" />
+      <description>
+        Synchronize bookmarks, saved passwords, persistent cookies, history, 
+        tabs, and windows. Encrypt sensitive data. 
+
+        <html:a href="#" style="color:blue; text-decoration:underline;"
+        onclick="CLB_form.showLearnMore(this); return false;"
+        >Learn More</html:a>
+      </description>
+      <radio 
+        id="clb-installtype-advanced" 
+        style="font-weight:bold;" 
+        label="Advanced"/>
+      <description>
+        Configure synchronization and encryption settings yourself.
+      </description>
+    </radiogroup>
+  </wizardpage>
+
+  <wizardpage pageid="clb-settings" 
+    next="clb-createpin" 
+    onpageshow="return CLB_form.showSettingsPage()"
+    onpageadvanced="return CLB_form.handleSettingPageAdvanced()"
+    onpagerewound="document.documentElement.goTo('clb-installtype'); return false;"
+    label="Step 3: Choosing synchronization options">
+    <vbox id="clb-component-selector" flex="1"/>
+  </wizardpage>
+
+  <wizardpage pageid="clb-createpin"
+    next="clb-progress"
+    label="Step 4: Choosing a PIN"
+    onpageshow="return CLB_form.showCreatePinPage()"
+    onpageadvanced="return CLB_form.handleCreatePinPageAdvanced()">
+    <description>
+      You'll need a PIN to set up Google Browser Sync on other computers.
+    </description>
+    <description>
+      Google Browser Sync will use your PIN to unlock your 
+      encrypted information. Your PIN must be at least four characters long, 
+      and can be composed of any combination of numbers, letters, or symbols.
+    </description>
+
+    <spacer style="height:1.5em;"/>
+
+    <hbox flex="1">
+      <spacer flex="1"/>
+      <grid flex="2.5">
+        <columns>
+          <column/>
+          <column/>
+        </columns>
+        <rows>
+          <row align="center">
+            <vbox>
+              <label value="Choose a PIN:"/>
+              <label style="font-size:.8em" value="(4 or more characters)"/>
+            </vbox>
+            <textbox id="clb-create-token" type="password"
+               oninput="CLB_form.handleCreatePinPageInput()"
+               style="width:200px;"/>
+            <spacer/>
+          </row>
+          <row align="center">
+            <label value="Confirm PIN:"/>
+            <textbox id="clb-confirm-token" type="password"
+               oninput="CLB_form.handleCreatePinPageInput()"
+               style="width:200px;"/>
+            <spacer/>
+          </row>
+        </rows>
+      </grid>
+      <spacer flex="1"/>
+    </hbox>
+  </wizardpage>
+
+  <wizardpage pageid="clb-restart"
+    onpageshow="return CLB_form.showRestartPage()"
+    label="Congratulations. You've successfully installed Google Browser Sync.">    
+    <description>
+      Thanks for setting up Google Browser Sync.
+    </description>
+
+    <description>
+      <html:ul>
+      <html:li style="margin-bottom:1em;">Google Browser Sync will 
+      continuously synchronize the browser 
+      settings you selected.</html:li>
+      <html:li>Install Google Browser Sync on the other 
+      computers you wish to have access to these browser 
+      settings.</html:li>
+      </html:ul>
+    </description>
+  </wizardpage>
+
+  <wizardpage pageid="clb-token" next="clb-progress" 
+    onpageshow="return CLB_form.handleTokenPageShow()"
+    onpageadvanced="return CLB_form.handleTokenPageAdvanced()"
+    onpagerewound="document.documentElement.goTo('clb-welcome'); return false;"
+    label="Welcome back to Google Browser Sync">
+    <description>
+      Please enter your PIN to unlock your encrypted data.
+    </description>
+    <spacer style="height:1.5em;"/>
+    <hbox align="center">
+      <label value="Enter PIN:"/>
+      <textbox 
+        id="clb-verify-token" 
+        oninput="CLB_form.handleTokenPageInput()" 
+        style="width:150px; font-weight:bold;"
+        type="password"/>
+    </hbox>
+  </wizardpage>
+
+  <wizardpage pageid="clb-success"
+    onpageshow="return CLB_form.showSuccessPage()"
+    label="You've successfully installed Google Browser Sync on this machine.">
+    <description>
+      Google Browser Sync has synchronized your browser settings on this 
+      computer with all of the other computers you've signed up for Google 
+      Browser Sync.
+    </description>
+    <description>
+      <html:ul>
+      <html:li style="margin-bottom:1em;">If you chose to synchronize your 
+      bookmarks, we've added the bookmarks from other synced computers to the 
+      existing bookmarks on this computer.</html:li>
+      <html:li>Any changes you make to your synchronized browser settings on 
+      this computer will now be reflected in your other synced 
+      computers.</html:li>
+      </html:ul>
+    </description>
+  </wizardpage>
+
+  <wizardpage id="clb-progress" pageid="clb-progress" next="clb-progress"
+    onpageshow="return CLB_form.handleSyncingPageShow()"
+    onpageadvanced="return CLB_form.hideProgressMeter()"
+    onpagerewound="return CLB_form.hideProgressMeter()"
+    label="Please wait...">
+    <description id="clb-progress-blurb"/>
+    <spacer style="height:1em;"/>
+    <progressmeter id="clb-progress-meter" mode="undetermined" 
+      collapsed="true" />
+    <description id="clb-progress-details"/>
+  </wizardpage>
+
+  <script type="application/x-javascript">
+    var CLB_form = 
+      new (Components.classes["@google.com/browserstate/app-context;1"]
+                     .getService().wrappedJSObject)
+                     .CLB_WelcomeForm(window);
+  </script>
+
+</wizard>

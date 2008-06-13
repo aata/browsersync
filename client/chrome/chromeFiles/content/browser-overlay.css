@@ -1,0 +1,91 @@
+/**
+ * The status icon. We don't use the one that comes with toolbarbutton
+ * because we don't want it to be part of the pushable button since it has it's
+ * own behavior -- showing the infobubble -- when it is is pushed.
+ */
+#clb-toolbarbutton .toolbarbutton-icon {
+  border:0px solid black!important;
+  margin-left:2px!important;
+  margin-right:4px!important;
+  display:block!important;
+}
+
+/**
+ * The text on the toolbarbutton. It should be bold and always displayed. Also,
+ * it goes to the right of the icon.
+ */
+#clb-toolbarbutton .toolbarbutton-text { 
+  font-weight:bold!important;
+  margin-right:6px!important;
+  display:block!important;
+}
+
+/**
+ * The little down-arrow next to the text that indicates that a submenu is 
+ * available.
+ */
+#clb-toolbarbutton .dropmarker-icon { 
+  margin-right:2px!important;
+}
+
+.clb-infobubble { 
+  position: fixed; 
+  width: 300px;
+  z-index: 100; 
+}
+
+.clb-infobubble-head,
+.clb-infobubble-tail { 
+  position: fixed;
+  z-index: 101;
+}
+
+.clb-infobubble-bubble {
+  background: white; 
+  -moz-border-radius: 8px; 
+  border: 1px solid; 
+  padding: 8px;
+  width: 284px;
+  font-family: tahoma, arial, sans-serif;
+}
+
+.clb-infobubble-desc { 
+  margin: 0.35em 0 1em; 
+}
+
+.clb-infobubble-close { 
+  -moz-image-region: rect(0px 18px 18px 0px);
+  -moz-appearance: none;
+  list-style-image: url("chrome://browserstate/content/close-buttons.png");
+  background: none !important;
+  border: none !important;
+  padding: 0;
+}
+
+.clb-infobubble-close:hover { 
+  -moz-image-region: rect(0px 36px 18px 18px);
+}
+
+.clb-infobubble-buttons button { 
+  margin-left: 0px !important;
+}
+
+.clb-restore-checkbox {
+  margin-top:1px;
+  margin-bottom:1px;
+  width:170px;
+  overflow-x:hidden;
+}
+
+.clb-restore-title {
+  color:grey;
+  width:70px;
+  overflow-x:hidden;
+}
+
+.clb-restore-rule {
+  background:silver;
+  height:1px; 
+  overflow:hidden; 
+  margin:0.5em 0;
+}

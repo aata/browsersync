@@ -1,0 +1,44 @@
+<?xml version="1.0"?>
+
+<?xml-stylesheet href="component-selector.css" type="text/css" ?>
+
+<overlay 
+  xmlns="http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul"
+  xmlns:html="http://www.w3.org/1999/xhtml">
+
+  <vbox id="clb-component-selector" flex="1">
+    <!-- 
+      As Firefox likes to focus the first link on a XUL page, we include
+      this blank link to avoid things being focused for strange reasons.
+    -->
+    <html:a href="#"></html:a>
+
+    <description>
+      Choose the browser components that you'd like to continuously synchronize 
+      between computers.
+    </description>
+    
+    <description>
+      For increased security, you may choose to encrypt the information that's 
+      stored on Google Browser Sync. <html:a href="#" 
+      id="clb-componentselector-learnmore"
+      style="color:blue; text-decoration:underline; white-space:nowrap;"
+      >Learn More</html:a>
+    </description>
+
+    <listbox id="clb-settings-list" flex="1"
+      style="-moz-user-focus:none; -moz-user-select:none;">
+      <listhead>
+        <listheader label=""/>
+        <listheader label="Store"/>
+        <listheader label="Encrypt"/>
+      </listhead>
+      <listcols>
+        <listcol flex="2"/>
+        <listcol flex="1"/>
+        <listcol flex="1"/>
+      </listcols>
+    </listbox>
+  </vbox>
+
+</overlay>

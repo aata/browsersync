@@ -1,0 +1,139 @@
+<?xml version="1.0"?>
+
+<?xml-stylesheet href="browser-overlay.css" type="text/css" ?>
+
+<overlay 
+  xmlns="http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul">
+
+  <toolbarpalette id="BrowserToolbarPalette">
+    <toolbarbutton id="clb-toolbarbutton"
+      type="menu"
+      label="Browser Sync"
+      image="chrome://browserstate/content/icon-small.png" />
+  </toolbarpalette>
+
+  <!-- Hacky way to preload animated image. TODO(aa): make all icons one graphic
+  and use cropping to swap them. -->
+  <image src="chrome://browserstate/content/icon-small-anim.gif" 
+    collapsed="true"/>
+
+  <menupopup id="menu_ToolsPopup">
+    <menu 
+      id="clb-toolsmenu" 
+      hidden="false"
+      label="Google Browser Sync"
+      insertbefore="sanitizeSeparator">
+      <menupopup id="clb-menu">
+        <menuitem 
+          id="clb-status-setup" 
+          label="Setup Google Browser Sync"
+          hidden="true" 
+          oncommand="CLB_browser.startSetup_()"/>
+        <menuitem 
+          id="clb-cancel-sync" 
+          label="Cancel Sync"
+          hidden="true" 
+          oncommand="CLB_context.CLB_syncMan.cancelSync()"/>
+        <menuitem 
+          id="clb-status-settings" 
+          label="Settings..."
+          disabled="false"
+          oncommand="CLB_browser.handleSettingsClicked(event)"/>
+        <menuitem 
+          id="clb-status-reconnect" 
+          label="Reconnect"
+          disabled="false" 
+          oncommand="CLB_browser.startReconnect_()"/>
+        <menuseparator id="clb-debug-separator" hidden="true"/>
+        <menu 
+          id="clb-debug-menu" 
+          hidden="true"
+          label="Debug">
+          <menupopup id="clb-debug-menupopup">
+            <menuitem 
+              label="Show Log" 
+              oncommand="CLB_browser.handleShowLogClicked(event)" />
+            <menuitem 
+              label="Dump Bookmarks DataSource"
+              oncommand="CLB_browser.handleDumpBookmarksClicked(event)" />
+          </menupopup>
+        </menu>
+      </menupopup>
+    </menu>
+  </menupopup>
+
+  <hbox class="clb-infobubble-head" hidden="true">
+    <image/>
+  </hbox>
+  <vbox class="clb-infobubble" hidden="true">
+    <vbox class="clb-infobubble-bubble">
+      <hbox id="clb-infobubble-titlebar" align="start">
+        <image 
+          src="chrome://browserstate/content/icon-small.png" 
+          style="width:16px; height:16px;"/>
+        <label id="clb-infobubble-title" 
+          style="font-weight:bold" 
+          value="Google Browser Sync" 
+          flex="1"/>
+        <toolbarbutton class="clb-infobubble-close" 
+          oncommand="CLB_context.CLB_InfoBubble.hideAll()"/>
+      </hbox>
+      <description class="clb-infobubble-desc" flex="1" />
+      <hbox class="clb-infobubble-buttons"/>
+    </vbox>
+  </vbox>
+  <hbox class="clb-infobubble-tail" hidden="true">
+    <image/>
+  </hbox>
+
+  <hbox class="clb-infobubble-head" hidden="true">
+    <image/>
+  </hbox>
+  <vbox class="clb-infobubble" hidden="true">
+    <vbox class="clb-infobubble-bubble">
+      <hbox id="clb-infobubble-titlebar" align="start">
+        <image 
+          src="chrome://browserstate/content/icon-small.png" 
+          style="width:16px; height:16px;"/>
+        <label id="clb-infobubble-title" 
+          style="font-weight:bold" 
+          value="Restore Last Session" 
+          flex="1"/>
+        <toolbarbutton class="clb-infobubble-close" 
+          oncommand="CLB_context.CLB_InfoBubble.hideAll()"/>
+      </hbox>
+      <spacer style="height:0.5em"/>
+      <description class="clb-infobubble-desc" flex="1">
+        Select the pages from your last session to restore.
+      </description>
+      <grid>
+        <columns>
+          <column/>
+          <column/>
+          <column/>
+          <column/>
+        </columns>
+  <rows id="clb-restore-rows"
+    style="overflow-x:hidden; overflow-y:auto; max-height:150px;"/>
+      </grid>
+      <spacer style="height:1em"/>
+      <hbox class="clb-infobubble-buttons">
+        <button label="Restore Pages"/>
+      </hbox>
+    </vbox>
+  </vbox>
+  
+  <hbox class="clb-infobubble-tail" hidden="true">
+    <image/>
+  </hbox>
+
+  <script type="application/x-javascript">
+    var CLB_context = 
+      Components.classes["@google.com/browserstate/app-context;1"]
+                        .getService()
+                        .wrappedJSObject;
+
+    var CLB_browser = new CLB_context.CLB_BrowserOverlay(window);
+  </script>
+  
+</overlay>

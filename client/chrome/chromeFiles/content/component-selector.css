@@ -1,0 +1,33 @@
+listitem[selected="true"] {
+  background-color:-moz-field; 
+}
+
+listheader {
+  text-align:left;
+}
+
+listitem {
+  border-bottom:1px solid #eee;
+}
+
+listcol {
+  width:90px;
+}
+
+listcell {
+  height:2em;
+}
+
+listcell checkbox {
+  width:19px;
+  overflow:hidden;
+}
+
+.labelled {
+  width:auto;
+}
+
+description {
+  margin-bottom:1em;
+  line-height:1.5em;
+}
