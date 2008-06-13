@@ -20,8 +20,15 @@ var G_GDEBUG = true;
 (function() {
   // The list of script files to load
   var libs = [
-    "lang.js"
-  ];
+    "lang.js",
+
+    // crypto basics
+    "aes.js",
+    "arc4.js",
+    "cbc.js",
+    "hmac.js",
+    "sha1.js"
+    ];
 
   // Load js files
   CLB_dump("Initializing Google Browser Sync...");
@@ -35,7 +42,7 @@ var G_GDEBUG = true;
       throw e;
     }
   }
-  CLB_dump("Done.");
+  CLB_dump("Done: " + SHA1);
 
   /**
    * Gets a nsIFile for the given physical path relative to the libs/ folder
