@@ -21,8 +21,10 @@ var G_GDEBUG = true;
   // The list of script files to load
   var libs = [
     // basics
-    "lang.js",
+    "lang.js",  // must come before all other libs
     "doubledictionary.js",
+    "eventregistrar.js",
+    "listdictionary.js",
     "set.js",
     "workqueue.js",
 
@@ -42,9 +44,11 @@ var G_GDEBUG = true;
     "preferences.js",  // must come before debug.js
     "debug.js",
     "filesystem.js",
+    "jsmodule.js",
     "objectsafemap.js",
     "protocol4.js",
     "requester.js",
+    "tabbedbrowserwatcher.js",
     "updater.js",
     "xmlutils.js"
     ];
