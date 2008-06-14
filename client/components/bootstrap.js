@@ -41,6 +41,7 @@ var CLB_DEBUG = true;
 
     // firefox utils
     "firefox/alarm.js",
+    "firefox/base64.js",
     "firefox/cryptohasher.js",
     "firefox/preferences.js",  // must come before debug.js
     "firefox/debug.js",
@@ -110,7 +111,9 @@ var CLB_DEBUG = true;
 
   // Register some XPCOM components.
   CLB_dump("Instanciating core objects...");
-  var CLB_module = new G_JSModule();
+  global.CLB_syncMan = new CLB_SyncManager();
+  global.CLB_app = new CLB_Application();
+  global.CLB_module = new G_JSModule();
 
   CLB_dump("Registering with XPCOM...");
   // Allows our xul code to use the javascript loaded into this service
@@ -118,6 +121,32 @@ var CLB_DEBUG = true;
                             "@google.com/browserstate/app-context;1", 
                             "CLB_AppContext",
                             {wrappedJSObject:this});
+
+  // The main shell for the clobber client
+  CLB_module.registerObject("{1ec74bff-2c43-4a0a-904f-821b0f624970}",
+                            "@google.com/browserstate/application;1", 
+                            "CLB_Application",
+                            CLB_app);
+
+  // The official external interface to CLB_SyncManager for other extensions
+  CLB_module.registerObject("{2fffb7ba-c818-465c-8250-84e9bc4f350b}",
+                            "@google.com/browserstate/sync-manager;1", 
+                            "CLB_SyncManager",
+                            CLB_syncMan);
+
+  CLB_dump("Adding categories...");
+  // Register CLB_app to be a command line handler with a very high priority, so
+  // that it can execute before other command line handlers.
+  // The priority is the 'a' part of the second argument. See: 
+  // http://lxr.mozilla.org/mozilla/source/toolkit/components/commandlines/
+  // public/nsICommandLineHandler.idl
+  var catMgr = Cc["@mozilla.org/categorymanager;1"]
+                 .getService(Ci.nsICategoryManager);
+
+  catMgr.addCategoryEntry("command-line-handler",
+                          "a-browserstate",
+                          "@google.com/browserstate/application;1",
+                          true, true);
 
   global.NSGetModule = function() {
     return CLB_module;
