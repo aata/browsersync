@@ -65,7 +65,24 @@ var G_GDEBUG = true;
       throw e;
     }
   }
-  CLB_dump("Done: " + G_FirefoxXMLUtils);
+  CLB_dump("Done.");
+
+  // Register some XPCOM components.
+  CLB_dump("Instanciating core objects...");
+  var CLB_module = new G_JSModule();
+
+  CLB_dump("Registering with XPCOM...");
+  // Allows our xul code to use the javascript loaded into this service
+  CLB_module.registerObject("{3bb339f9-131b-465b-b52c-97ee10e61a05}",
+                            "@google.com/browserstate/app-context;1", 
+                            "CLB_AppContext",
+                            {wrappedJSObject:this});
+
+  global.NSGetModule = function() {
+    return CLB_module;
+  };
+
+  CLB_dump("Google Browser Sync initialized successfully!");
 
   /**
    * Gets a nsIFile for the given physical path relative to the libs/ folder
@@ -99,10 +116,6 @@ var G_GDEBUG = true;
       .getURLSpecFromFile(file);
   }
 })();
-
-function NSGetModule() {
-  throw new Error("hi!");
-}
 
 /**
  * A utility to output to the console, even before G_Debug is loaded.
