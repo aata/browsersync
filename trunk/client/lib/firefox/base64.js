@@ -1,5 +1,4 @@
 // Copyright (C) 2005 and onwards Google, Inc.
-// Author: Fritz Schneider
 //
 // Base64 en/decoding. Not much to say here except that we work with
 // decoded values in arrays of bytes. By "byte" I mean a number in [0,
