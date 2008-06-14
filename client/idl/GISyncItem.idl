@@ -1,0 +1,69 @@
+#include "nsISupports.idl"
+#include "nsIVariant.idl"
+
+/**
+ * A data item being transferred between the client and server. Roughly 
+ * parallels the ATOM entry data model because that is the format we expect
+ * to speak to servers.
+ */
+[scriptable, uuid(6CE550DE-0477-11DA-913E-000D933CA15C)]
+interface GISyncItem : nsISupports
+{
+  /**
+   * The entire item should be removed
+   */
+  attribute boolean isRemove;
+
+  /**
+   * The ID of the component this data item belongs to, same value as 
+   * GISyncComponent.componentID
+   */
+  attribute AString componentID;
+
+  /**
+   * An optional "type" ID which components can use to distinguish the 
+   * different types of data they may store.
+   */
+  attribute AString typeID;
+
+  /**
+   * Uniquely identifies this data item within the set of data items which have
+   * a particular componentID and typeID.
+   */
+  attribute AString itemID;
+
+  /**
+   * SyncItems can have any number of additional properties besides title and 
+   * content. SetProperty is used to create these. Accepted concrete types for 
+   * the value are string, float, PRint32, boolean.
+   */
+  void setProperty(in AString name, in nsIVariant value);
+
+  /**
+   * Gets the value of a property set with setProperty(). Returns null if the
+   * property is not found.
+   */
+  nsIVariant getProperty(in AString name);
+
+  /**
+   * Determines if a property has been defined with setProperty()
+   */
+  boolean hasProperty(in AString name);
+
+  /**
+   * Removes and returns a property that was previously set with setProperty().
+   * Returns null if the property was not found.
+   */
+  nsIVariant deleteProperty(in AString name);
+
+  /**
+   * Removes all properties previously defined by setProperty().
+   */
+  void clearProperties();
+
+  /**
+   * Returns the names of all properties currently defined.
+   */
+  void getPropertyNames(out PRUint32 count, 
+                        [retval, array, size_is(count)] out string names);
+};

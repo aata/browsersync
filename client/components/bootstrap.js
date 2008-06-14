@@ -16,42 +16,83 @@ const Ci = Components.interfaces;
 
 // Debug mode
 var G_GDEBUG = true;
+var CLB_DEBUG = true;
 
 (function() {
   // The list of script files to load
   var libs = [
     // basics
-    "lang.js",  // must come before all other libs
-    "doubledictionary.js",
-    "eventregistrar.js",
-    "listdictionary.js",
-    "set.js",
-    "workqueue.js",
+    "base/lang.js",  // must come before all other libs
+    "base/doubledictionary.js",
+    "base/eventregistrar.js",
+    "base/listdictionary.js",
+    "base/set.js",
+    "base/workqueue.js",
 
     // third-party
-    "iso8601.js",
+    "third_party/iso8601.js",
 
     // crypto
-    "aes.js",
-    "arc4.js",
-    "cbc.js",
-    "hmac.js",
-    "sha1.js",
+    "crypto/aes.js",
+    "crypto/arc4.js",
+    "crypto/cbc.js",
+    "crypto/hmac.js",
+    "crypto/sha1.js",
 
     // firefox utils
-    "alarm.js",
-    "cryptohasher.js",
-    "preferences.js",  // must come before debug.js
-    "debug.js",
-    "filesystem.js",
-    "jsmodule.js",
-    "objectsafemap.js",
-    "protocol4.js",
-    "requester.js",
-    "tabbedbrowserwatcher.js",
+    "firefox/alarm.js",
+    "firefox/cryptohasher.js",
+    "firefox/preferences.js",  // must come before debug.js
+    "firefox/debug.js",
+    "firefox/filesystem.js",
+    "firefox/jsmodule.js",
+    "firefox/objectsafemap.js",
+    "firefox/protocol4.js",
+    "firefox/requester.js",
+    "firefox/tabbedbrowserwatcher.js",
+    "firefox/updater.js",
+    "firefox/xmlutils.js",
+
+    // clobber
+    "application.js",
+    "arrayenumerator.js",
+    "badcertlistener.js",
+    "bookmarkenumerator.js",
+    "bookmarkresolver.js",
+    "bookmarksyncer.js",
+    "browseroverlay.js",
+    "componentselector.js",
+    "conflict.js",
+    "conflictresolver.js",
+    "cookieenumerator.js",
+    "cookiesyncer.js",
+    "crypter.js",
+    "crypter2.js",
+    "downloader.js",
+    "historyenumerator.js",
+    "historysyncer.js",
+    "infobubble.js",
+    "listdictionary.js",
+    "loginutil.js",
+    "passwordform.js",
+    "passwordsyncer.js",
+    "prefssyncer.js",
+    "rdfutils.js",
+    "requestfactory.js",
+    "restoretabsui.js",
+    "settingsform.js",
+    "settingssyncer.js",
+    "startup.js",
+    "syncingform.js",
+    "syncitem.js",
+    "syncmanager.js",
+    "tabsyncer.js",
+    "updatequeue.js",
     "updater.js",
+    "updatingform.js",
+    "welcomeform.js",
     "xmlutils.js"
-    ];
+  ];
 
   // Load js files
   CLB_dump("Initializing Google Browser Sync...");

@@ -1,0 +1,64 @@
+#include "nsISupports.idl"
+#include "nsISimpleEnumerator.idl"
+#include "GISyncItem.idl"
+
+[scriptable, uuid(C9224B57-0478-11DA-83EF-000D933CA15C)]
+interface GISyncComponent : nsISupports
+{
+  /**
+   * (Default) Only sync changes since last contact with server. 
+   */
+  const unsigned long SYNC_SINCE_LAST_UPDATE = 0;
+
+  /**
+   * Sync changes since last sync request.
+   */
+  const unsigned long SYNC_SINCE_LAST_SYNC = 1;
+
+  [readonly] attribute AString componentID;
+  [readonly] attribute AString componentName;
+  [readonly] attribute boolean encryptionRequired;
+  [readonly] attribute boolean syncOfflineChanges;
+  [readonly] attribute long syncBehavior;
+  void start();
+  void stop();
+  void beforeUpdate();
+
+  /*
+   * Notification that an item was downloaded from the server.  This is for
+   * informational purposes only - the item itself cannot be changed.
+   */
+  void onBeforeResolveConflict(in GISyncItem item);
+
+  /*
+   * Notification that there is a conflict between two items.  The general
+   * convention is that the offline item should win, so if there is
+   * a conflict between an offline and synced item, the offline item
+   * is passed as the newer item.
+   *
+   * Components can resolve the conflict in two different ways.  First,
+   * they can modify the oldItem directly.  Second, they can return a
+   * list of items that represent other updates necessary to resolve
+   * the conflict.  Note that the component should not modify the newItem
+   * directly, and any such changes will be thrown out.
+   *
+   * TODO: maybe change to return an array:
+   * http://lxr.mozilla.org/seamonkey/source/js/src/xpconnect/tests/idl/xpctest.idl#198
+   */
+  nsISimpleEnumerator onItemConflict(in AString conflict,
+                                     in GISyncItem oldItem,
+                                     in GISyncItem newItem);
+
+  /*
+   * Indicates that an item is ready to be applied to Firefox's local
+   * store.
+   */
+  void onItemAvailable(in GISyncItem item);
+
+  /*
+   * Given the itemID and typeID, return a filled GISyncItem.  Component
+   * may return null to indicate error.
+   */
+  GISyncItem getItemByID(in AString itemID, in AString typeID);
+  nsISimpleEnumerator getCurrentItems();
+};
