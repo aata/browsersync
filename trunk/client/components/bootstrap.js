@@ -36,11 +36,17 @@ var G_GDEBUG = true;
     "hmac.js",
     "sha1.js",
 
-    // firefox basics
-    "preferences.js",
+    // firefox utils
+    "alarm.js",
+    "cryptohasher.js",
+    "preferences.js",  // must come before debug.js
     "debug.js",
     "filesystem.js",
-    "objectsafemap.js"
+    "objectsafemap.js",
+    "protocol4.js",
+    "requester.js",
+    "updater.js",
+    "xmlutils.js"
     ];
 
   // Load js files
@@ -55,7 +61,7 @@ var G_GDEBUG = true;
       throw e;
     }
   }
-  CLB_dump("Done: " + G_Preferences);
+  CLB_dump("Done: " + G_FirefoxXMLUtils);
 
   /**
    * Gets a nsIFile for the given physical path relative to the libs/ folder
