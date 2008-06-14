@@ -1,0 +1,14 @@
+#include "nsISupports.idl"
+
+[scriptable, uuid(7fc134c0-1590-4430-a49b-570817d5ea1f)]
+interface GISyncObserver : nsISupports
+{
+  void updateStart();
+  void updateProgress(in float percent, in AString status);
+  void updateComplete();
+  void updateFailure(in PRint32 errorCode, in AString status);
+  void syncStart();
+  void syncProgress(in float percent, in AString status);
+  void syncComplete();
+  void syncFailure(in PRint32 errorCode, in AString status);
+};

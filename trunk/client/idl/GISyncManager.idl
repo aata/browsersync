@@ -1,0 +1,80 @@
+#include "nsISimpleEnumerator.idl"
+#include "nsISupports.idl"
+#include "GISyncObserver.idl"
+#include "GISyncComponent.idl"
+
+[scriptable, uuid(F273F2ED-0478-11DA-8BE3-000D933CA15C)]
+interface GISyncManager : nsISupports
+{
+    /**
+     * Called to start the sync manager listening for updates from registered 
+     * components.
+     */
+    void start();
+
+    /**
+     * Called to stop the sync manager from reporting updates to the server.
+     */
+    void stop();
+
+    /**
+     * Registers a components to provide and receive server-stored browser 
+     * state
+     */
+    void registerComponent(in GISyncComponent component);
+
+    /**
+     * Undoes what registerComponent does
+     */
+    void unregisterComponent(in GISyncComponent component);
+
+    /**
+     * Register a conflict to perform conflict resolution on.
+     * Note that you can specify null for typeID if you want it to apply to
+     * all types.
+     */
+    void registerConflict(in GISyncComponent component,
+                          in AString typeID,
+                          in AString name,
+                          in nsISimpleEnumerator properties);
+
+    /**
+     * Gets an enumerator of all registered components.
+     */
+    nsISimpleEnumerator getComponents();
+
+    /**
+     * Queues an update to the state stored on the server. Updates can be 
+     * "partial", meaning that title, content, and any properties on GISyncItem
+     * instances can be specified, or not specified, in any combination. They
+     * will be flattened by GISyncManager. New properties and values of the
+     * same name overwrite old ones.
+     */
+    void update(in GISyncItem item);
+
+    /**
+     * Sends all pending updates to the server right now
+     */
+    void sendPending();
+
+    /**
+     * Observe the download an upload state of the syncmanager.
+     */
+    void addObserver(in GISyncObserver importObserver);
+
+    /**
+     * Stop observing the state of syncmanager.
+     */
+    void removeObserver(in GISyncObserver importObserver);
+
+    /**
+     * Begin the process of downloading new state from the server
+     */
+    void startSync();
+
+    /**
+     * Begin the process of importing the current state of all registered 
+     * components to the server. 
+     */
+    void startImport();
+};
