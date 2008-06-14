@@ -40,6 +40,7 @@ var CLB_DEBUG = true;
     "crypto/sha1.js",
 
     // firefox utils
+    "firefox/lang.js",  // must come before other ff libs
     "firefox/alarm.js",
     "firefox/base64.js",
     "firefox/cryptohasher.js",
