@@ -446,7 +446,6 @@ function bindMethods(obj) {
  * };
  * </pre>
  *
- * TODO: remove this tag when the compiler no longer complains.
  * @notypecheck
  */
 Function.prototype.inherits = function(parentCtor) {
