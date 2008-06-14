@@ -1,0 +1,58 @@
+#summary How to set up a develop environment for BrowserSync
+
+Setting up BrowserSync for development is pretty easy.
+
+=Check out the code=
+
+To check out the code, you'll need an SVN client. Download one here: http://subversion.tigris.org/.
+
+Once you have one, go to the [http://code.google.com/p/browsersync/source/checkout source tab] to see the commands to issue to check out.
+
+=Set up a development profile=
+
+It will make this easier if you set up a special Firefox profile for development.
+
+*Mac/Linux*:
+{{{
+mkdir -p p1/extensions
+echo "path/to/browsersync/client/" > "p1/extensions/browserstate@google.com"
+}}}
+
+*Windows*:
+{{{
+mkdir p1
+mkdir p1\extensions
+echo "c:\path\to\browsersync\client\" > "p1\extensions\browserstate@google.com"
+}}}
+
+Next, create a file called `user.js` in the profile folder, and copy the following lines into it:
+
+{{{
+user_pref("nglayout.debug.disable_xul_cache",true);
+user_pref("browser.dom.window.dump.enabled",true);
+user_pref("javascript.options.showInConsole",true);
+user_pref("extensions.logging.enabled",true);
+}}}
+
+=Development Extensions (Optional)=
+
+There are some extensions that are useful for extension developers:
+
+  * [http://ted.mielczarek.org/code/mozilla/extensiondev/ Extension Developer's Extension]
+  * [http://www.getfirebug.com/releases/ ChromeBug]
+
+=Running it=
+
+To run Firefox with your development Clobber, start Firefox like this from the command line:
+
+*Windows*
+{{{
+c:\program files\mozilla firefox\firefox.exe -profile p1 -no-remote -console
+}}}
+
+*Mac/Linux*
+{{{
+/path/to/firefox -profile p1 -no-remote -console
+}}}
+
+Firefox will load the extension directly from your extension directory. This means that there is no build phase to hacking on Gears. Just make your changes and restart the browser.
