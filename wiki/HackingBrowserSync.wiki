@@ -57,4 +57,4 @@ c:\program files\mozilla firefox\firefox.exe -profile p1 -no-remote -console
 /path/to/firefox -profile p1 -no-remote -console
 }}}
 
-Firefox will load the extension directly from your extension directory. This means that there is no build phase to hacking on Gears. Just make your changes and restart the browser.
+Firefox will load the extension directly from your extension directory. This means that there is no build phase to hacking on BrowserSync. Just make your changes and restart the browser.
