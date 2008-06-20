@@ -15,15 +15,17 @@ Life will be easier with a special Firefox profile for BrowserSync development. 
 *Mac/Linux*:
 {{{
 mkdir -p p1/extensions
-echo "path/to/browsersync/client/" > "p1/extensions/browserstate@google.com"
+echo "path/to/browsersync/checkout/client/" > "p1/extensions/browserstate@google.com"
 }}}
 
 *Windows*:
 {{{
 mkdir p1
 mkdir p1\extensions
-echo "c:\path\to\browsersync\client\" > "p1\extensions\browserstate@google.com"
+echo "c:\path\to\browsersync\checkout\client\" > "p1\extensions\browserstate@google.com"
 }}}
+
+For example, if you checked out BrowserSync to `c:\browsersync`, the path to put in this file would be `c:\browsersync\client`.
 
 Next, create a file called `user.js` in the profile folder, and copy the following lines into it:
 
