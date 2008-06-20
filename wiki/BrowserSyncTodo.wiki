@@ -4,9 +4,9 @@
   * Need to figure out how to integrate with new bookmark and history system
   * Need to figure out what the strategy will be for users who use the same account on multiple computers
 
-=== AppEngine Migration ===
+=== !AppEngine Migration ===
 
-Move the Clobber server to AppEngine.
+Move the Clobber server to !AppEngine.
 
 === Continuous Sync ===
 
