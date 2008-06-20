@@ -1,6 +1,6 @@
 #summary How to set up a develop environment for BrowserSync
 
-Setting up BrowserSync for development is pretty easy.
+Setting up !BrowserSync for development is pretty easy.
 
 =Check out the code=
 
@@ -10,7 +10,7 @@ Once you have one, go to the [http://code.google.com/p/browsersync/source/checko
 
 =Set up a development profile=
 
-Life will be easier with a special Firefox profile for BrowserSync development. Here's how to set one up:
+Life will be easier with a special Firefox profile for !BrowserSync development. Here's how to set one up:
 
 *Mac/Linux*:
 {{{
@@ -45,7 +45,7 @@ There are some extensions that are useful for extension developers:
 
 =Running it=
 
-To run Firefox with your development Clobber, start Firefox like this from the command line:
+To run Firefox with your development BrowserSync, start Firefox like this from the command line:
 
 *Windows*
 {{{
