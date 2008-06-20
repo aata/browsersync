@@ -10,7 +10,7 @@ Once you have one, go to the [http://code.google.com/p/browsersync/source/checko
 
 =Set up a development profile=
 
-It will make this easier if you set up a special Firefox profile for development.
+Life will be easier with a special Firefox profile for BrowserSync development. Here's how to set one up:
 
 *Mac/Linux*:
 {{{
