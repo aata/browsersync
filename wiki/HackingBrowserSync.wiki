@@ -4,7 +4,7 @@ Setting up !BrowserSync for development is pretty easy.
 
 =Check out the code=
 
-To check out the code, you'll need an SVN client. Download one here: http://subversion.tigris.org/.
+To check out the code, you'll need an svn client. Download one here: http://subversion.tigris.org/.
 
 Once you have one, go to the [http://code.google.com/p/browsersync/source/checkout source tab] to see the commands to issue to check out.
 
