@@ -113,3 +113,109 @@ Check whether a Clobber profile exists for the given user
 *Response:*
   * `200 OK`
   * `403 Forbidden` - User does not exist
+
+=== Session Management ===
+
+==== /start_session ====
+
+*Purpose:*
+To begin a new Clobber session, making this client the current active client
+
+*Request:*
+`POST /start_session?sid=SID&mid=MID&key=KEY`
+
+*Response:*
+  * `200 OK`
+  * `403 Forbidden` - Invalid `sid` or `key`
+
+==== /end_session ====
+
+*Purpose:*
+To end the current Clobber session, clearing the current active client
+
+*Request:*
+`POST /end_session?sid=SID&mid=MID&key=KEY`
+
+*Response:*
+  * `200 OK`
+  * `403 Forbidden` - Invalid `sid`, `mid`, or `key`
+
+=== Browser State Management ===
+
+==== /sync ====
+
+_TODO: I think there may be some errors in this section. The source was out of date and I tried to fill it in by memory._
+
+*Purpose:*
+To upload new browser state
+
+*Request:*
+`POST /update?sid=SID&mid=MID&key=KEY&timestamp=TIMESTAMP`
+
+*Response:*
+  * `200 OK` - body includes `lastUpdate` timestamp assigned to this state and requested browser state (see Data Format, below)
+  * `400 Bad Request` - Invalid XML 
+  * `403 Forbidden` - Invalid `sid`, `mid`, or `key`
+
+== Data Format ==
+
+The client and server represent browser state internally in different formats, so a common format must be used in any client-server communication. The same format is used for both pushing data up to the server and pulling it down to the client. The only difference is that the data sent from the server to the client will also include a <lastUpdate> field, indicating the server timestamp (in ISO 8601 format) to which the included data is current. The client should use this timestamp to indicate its last known synced state when requesting future syncs from the server.
+
+=== Add ===
+
+Add a new item to the stored browser state by specifying any appropriate identifying information (`componentID` and `itemID` are required, `typeID` only applies to some components) and the initial field values. Any fields that are missing from the Add item are assumed to be undefined.
+
+{{{
+<sync
+ xmlns="http://google.com/browserstate"
+ xmlns:xs="http://www.w3.org/2001/XMLSchema"
+ xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+ // lastUpdate only included for server->client communication
+ <lastUpdate>2005-11-24T01:29:34Z</lastUpdate>
+ <item>
+   <componentID>@google.com/browserstate/bookmark;1</componentID>
+   <itemID>rdf:#$o8SHG2</itemID>
+   <typeID>folder</typeID>
+   <prop name="title" xsi:type="xs:string">foo</prop>
+   <prop name="description" xsi:type="xs:string">my new folder</prop>
+   ...
+ </item>
+</sync>
+}}}
+
+=== Update ===
+
+The format for an Update item is the same as an Add item. The entry need only contain enough information to uniquely identify the item, and the new values of any fields that are being updated. This sample shows setting the "title" field to a new value, and deleting the "description" field by setting the `xsi:nil` attribute to "true".
+
+{{{
+<sync
+ xmlns="http://google.com/browserstate"
+ xmlns:xs="http://www.w3.org/2001/XMLSchema"
+ xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+ <item>
+   <componentID>@google.com/browserstate/bookmark;1</componentID>
+   <itemID>rdf:#$o8SHG2</itemID>
+   <typeID>folder</typeID>
+   <prop name="title" xsi:type="xs:string">bar</prop>
+   <prop name="description" xsi:nil="true"/>
+ </item>
+</sync>
+}}}
+
+=== Delete ===
+
+Item deletion is indicated by the `isRemove` element. If the `isRemove` element is present, any other field updates in this item will be ignored.
+
+{{{
+<sync
+ xmlns="http://google.com/browserstate"
+ xmlns:xs="http://www.w3.org/2001/XMLSchema"
+ xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+ <item>
+   <componentID>@google.com/browserstate/bookmark;1</componentID>
+   <itemID>rdf:#$o8SHG2</itemID>
+   <typeID>folder</typeID>
+   <isRemove/>
+ </item>
+</sync>
+}}}
