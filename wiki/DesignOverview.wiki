@@ -38,7 +38,7 @@ Clobber uses Google Accounts to authenticate users, as this provides several ben
   * Users don't have to remember new login information for regular use of Clobber
   * A programmatic authentication API already exists
 
-The primary drawback of using Google Accounts is the increased risk of user login info being stolen through phishing attacks or other security breaches. This login info is only as secure as the least secure Gaia-enabled service. To help offset this increased risk, Clobber also verifies the validity of the machine issuing the request, before transferring the user's stored data.
+The primary drawback of using Google Accounts is the increased risk of user login info being stolen through phishing attacks or other security breaches. This login info is only as secure as the least secure Google Accounts-enabled service. To help offset this increased risk, Clobber also verifies the validity of the machine issuing the request, before transferring the user's stored data.
 
 The Clobber client communicates with Google Accounts directly via the [http://code.google.com/apis/accounts/docs/AuthForInstalledApps.html programmatic login API] to acquire an SID cookie prior to beginning a Clobber session. This SID cookie must be passed to the server with every request in the form of the sid query parameter, for the duration of the Clobber session.
 
